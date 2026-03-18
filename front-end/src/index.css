@@ -1,1 +1,12 @@
 @import "tailwindcss";
+@import "tailwindcss-animated";
+
+h1,
+h2 {
+  font-family: "Russo One", sans-serif;
+}
+
+h3,
+p {
+  font-family: "Inter", sans-serif;
+}
