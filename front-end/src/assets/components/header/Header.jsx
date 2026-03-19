@@ -43,18 +43,18 @@ const Header = () => {
         className="flex md:hidden flex-col gap-1.5 z-50"
       >
         <span
-          className={`w-7 h-[3px] bg-black transition-all duration-300 ${
-            menuOpen ? "rotate-45 translate-y-[6px]" : ""
+          className={`w-7 h-[3px] transition-all duration-300 ${
+            menuOpen ? "bg-white rotate-45 translate-y-[6px]" : "bg-black"
           }`}
         />
         <span
-          className={`w-7 h-[3px] bg-black transition-all duration-300 ${
-            menuOpen ? "opacity-0" : ""
+          className={`w-7 h-[3px] transition-all duration-300 ${
+            menuOpen ? "bg-white opacity-0" : "bg-black"
           }`}
         />
         <span
-          className={`w-7 h-[3px] bg-black transition-all duration-300 ${
-            menuOpen ? "-rotate-45 -translate-y-[6px]" : ""
+          className={`w-7 h-[3px] transition-all duration-300 ${
+            menuOpen ? "bg-white -rotate-45 -translate-y-[6px]" : "bg-black"
           }`}
         />
       </button>

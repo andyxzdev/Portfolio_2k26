@@ -10,3 +10,7 @@ h3,
 p {
   font-family: "Inter", sans-serif;
 }
+
+html {
+  scroll-behavior: smooth;
+}
