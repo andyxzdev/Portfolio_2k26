@@ -1,6 +1,15 @@
-// 2xl -> 1920 acima de 1536px
-// xl -> 1366px acima de 1280px
-// lg -> 1024px tablets grandes / notebooks pequenos
-// md -> 768px tablets
-// sm -> 640px celulares maiores
+// 2xl -> acima de 1536px -> 1560px e 1920px
+// xl ->  acima de 1280px -> 1366px
+
+notebooks pequenos e tablets grandes
+
+// lg ->  >1024px -> 1120px
+
+notebooks pequenostablets grandes
+
+
+// md ->  >768px tablets (820px tbm)
+// sm ->  640px celulares maiores
+
+
 // text-2xl ou qualquer valor é qualquer tela abaixo de 640px

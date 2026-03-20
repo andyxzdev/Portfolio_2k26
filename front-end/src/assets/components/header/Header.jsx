@@ -32,7 +32,6 @@ const Header = () => {
 
   return (
     <header className="w-full h-20 flex items-center justify-between px-8 absolute z-50">
-      {/* Logo */}
       <img src={LogoTopo} alt="Logo-topo" className="w-20 h-20" />
 
       {/* Botão Mobile */}
@@ -58,8 +57,6 @@ const Header = () => {
           }`}
         />
       </button>
-
-      {/* Menu */}
       <nav
         className={`
           ${menuOpen ? "fixed top-20 left-0 w-full bg-[#111111]" : "hidden"}
@@ -89,8 +86,6 @@ const Header = () => {
               </li>
             ),
           )}
-
-          {/* Botão */}
           <button
             onClick={() =>
               handleExternalNavigation("https://wa.me/5524993215864")
