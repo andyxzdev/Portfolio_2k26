@@ -3,13 +3,9 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 
 import Carrossel_Text from "./assets/components/carrossel_Text/Carrossel_Text";
-import VideoHero from "./assets/video/Video Topo.mp4";
-import VideoHero2 from "./assets/video/Video2.mp4";
 import Header from "./assets/components/header/Header";
 import ContactButton from "./assets/components/button_contact/Contact_Button";
 import ContactButton2 from "./assets/components/button_contact/Contact_Button2";
-
-// import Banner_Sobre from "./assets/banners/banner-sobre.jpg";
 
 import ImgSolucoes from "./assets/arts/asset_solucoes.png";
 import Img_Front_Back from "./assets/arts/art-front-back.png";
@@ -25,6 +21,11 @@ import LogosFigma from "./assets/logo/figma.svg";
 import LogosPhotoshop from "./assets/logo/photoshop.svg";
 
 import Carrossel_Images from "./assets/components/carrossel_Images/Carrossel_Images";
+import Feedbacks from "./assets/components/feedbacks/Feedbacks.jsx";
+import Forms from "./assets/components/forms/Forms.jsx";
+import Footer from "./assets/components/footer/Footer.jsx";
+
+import Spline from "@splinetool/react-spline";
 
 const App = () => {
   const handleContact = () => {
@@ -38,21 +39,27 @@ const App = () => {
     offset: ["start end", "end start"],
   });
 
-  const rotate = useTransform(scrollYProgress, [0, 1], [-175, 225]);
+  const rotate = useTransform(scrollYProgress, [0, 1], [-165, 155]);
 
   return (
     <main className="overflow-hidden">
-      <section className="relative w-full">
+      <section className="relative w-full h-auto">
         <Carrossel_Text />
         <Header />
+        <div className="w-full h-[120vh] md:h-[100vh] xl:h-[130vh] pt-70 lg:pt-0 lg:ml-70">
+          <Spline
+            scene="https://prod.spline.design/pG06XrIod30UMvEf/scene.splinecode"
+            className="lg:left-16"
+          />
+        </div>
 
-        <div className="absolute inset-0 z-10 flex items-end justify-start pb-10 px-4 md:px-8 lg:items-center lg:pt-40">
-          <div className="w-full lg:max-w-[40%] lg:px-16 xl:px-24 flex flex-col gap-4 md:gap-6">
+        <div className="absolute inset-0 z-10 flex items-start lg:items-center justify-start pt-50 lg:pt-40 px-4 md:px-8 pointer-events-none">
+          <div className="w-full text-center md:text-left lg:max-w-[40%] lg:px-16 xl:px-24 flex flex-col gap-4 md:gap-6">
             <motion.h1
               initial={{ opacity: 0, x: -40 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.2, duration: 0.6 }}
-              className="text-2xl sm:text-3xl md:text-4xl lg:text-[2.2rem] xl:text-4xl 2xl:text-[3rem] leading-tight"
+              className="text-2xl sm:text-3xl md:text-4xl lg:text-[2.2rem] xl:text-4xl 2xl:text-[3rem] leading-tight bg-[#FFFFFF] lg:bg-transparent"
             >
               Desenvolvimento Web e Mobile
             </motion.h1>
@@ -61,7 +68,7 @@ const App = () => {
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3, duration: 0.6 }}
-              className="font-bold text-sm sm:text-base md:text-lg lg:text-base xl:text-[1rem] 2xl:text-[2rem]"
+              className="font-bold text-sm sm:text-base md:text-lg lg:text-base xl:text-[1rem] 2xl:text-[2rem] bg-[#FFFFFF] lg:bg-transparent"
             >
               que transforma ideias em produtos digitais
             </motion.h2>
@@ -70,7 +77,7 @@ const App = () => {
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5, duration: 0.6 }}
-              className="text-black text-sm sm:text-base md:text-lg lg:text-sm xl:text-base 2xl:text-[1.3rem]"
+              className="text-black text-sm sm:text-base md:text-lg lg:text-sm xl:text-base 2xl:text-[1.3rem] bg-[#FFFFFF] lg:bg-transparent"
             >
               Crio interfaces modernas, responsivas e focadas em conversão para
               ajudar seu negócio a crescer no digital.
@@ -80,32 +87,12 @@ const App = () => {
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.7, duration: 0.6 }}
+              className="pointer-events-auto"
             >
               <ContactButton text="Entrar em contato" onClick={handleContact} />
             </motion.div>
           </div>
         </div>
-
-        {/* vídeos mantidos */}
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          className="w-full h-[auto] hidden lg:block"
-        >
-          <source src={VideoHero} type="video/mp4" />
-        </video>
-
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          className="w-full h-[auto] block lg:hidden"
-        >
-          <source src={VideoHero2} type="video/mp4" />
-        </video>
       </section>
 
       <section className="w-full flex flex-col xl:flex-row xl:items-center px-4 md:px-8 xl:px-16 bg-black lg:text-right">
@@ -351,7 +338,7 @@ const App = () => {
         </div>
       </section>
 
-      <section>
+      <section className="w-full h-auto pb-25">
         <div className="text-center items-center justify-center">
           <motion.h1
             initial={{ opacity: 0, x: -40 }}
@@ -457,6 +444,16 @@ const App = () => {
           </div>
         </div>
       </section>
+
+      <Feedbacks />
+
+      <section className="w-full h-auto">
+        <div>
+          <Forms />
+        </div>
+      </section>
+
+      <Footer></Footer>
     </main>
   );
 };
