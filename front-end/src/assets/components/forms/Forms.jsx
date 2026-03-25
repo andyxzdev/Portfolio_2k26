@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import axios from "axios";
-import Background3D from "../particles/Particles.jsx"; // ajuste o caminho se necessário
 
 const Forms = () => {
   const [formData, setFormData] = useState({
@@ -49,11 +48,6 @@ const Forms = () => {
 
   return (
     <section className="relative w-full py-20 px-6 md:px-16 bg-[#111111] text-white overflow-hidden">
-      {/* FUNDO 3D */}
-      <div className="absolute inset-0 z-0 pointer-events-none">
-        <Background3D />
-      </div>
-
       {/* OVERLAY (melhora contraste) */}
       <div className="absolute inset-0 bg-black/60 z-[1]" />
 
@@ -139,7 +133,7 @@ const Forms = () => {
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-3 rounded-full bg-white text-black font-semibold hover:opacity-80 transition disabled:opacity-50"
+            className="w-full py-3 rounded-full bg-white text-black font-semibold hover:opacity-80 transition disabled:opacity-50 cursor-pointer"
           >
             {loading ? "Enviando..." : "Enviar mensagem"}
           </button>

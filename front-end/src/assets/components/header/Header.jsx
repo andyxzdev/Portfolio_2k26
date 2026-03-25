@@ -6,12 +6,10 @@ const Header = () => {
 
   const toggleMenu = () => setMenuOpen((prev) => !prev);
 
-  // Garante um reset ao montar
   useEffect(() => {
     setMenuOpen(false);
   }, []);
 
-  // Garante um reset ao voltar (do navegador)
   useEffect(() => {
     const handlePageShow = () => {
       setMenuOpen(false);
@@ -24,11 +22,20 @@ const Header = () => {
     };
   }, []);
 
-  // Função padrão para navegação externa
   const handleExternalNavigation = (url) => {
     setMenuOpen(false);
     window.open(url, "_blank");
   };
+
+  // ✅ NOVO: links com ids reais
+  const menuItems = [
+    { label: "Início", href: "#" },
+    { label: "Sobre", href: "#sobre" },
+    { label: "Serviços", href: "#servicos" },
+    { label: "Tecnologias", href: "#tecnologias" },
+    { label: "Projetos", href: "#projetos" },
+    { label: "Feedbacks", href: "#feedbacks" },
+  ];
 
   return (
     <header className="w-full h-20 flex items-center justify-between px-8 absolute z-50">
@@ -57,6 +64,8 @@ const Header = () => {
           }`}
         />
       </button>
+
+      {/* Menu */}
       <nav
         className={`
           ${menuOpen ? "fixed top-20 left-0 w-full bg-[#111111]" : "hidden"}
@@ -66,26 +75,25 @@ const Header = () => {
         `}
       >
         <ul className="flex flex-col md:flex-row items-center gap-6 md:gap-10">
-          {["Início", "Sobre", "Serviços", "Tecnologias", "Projetos"].map(
-            (item, index) => (
-              <li key={index}>
-                <a
-                  href="#"
-                  onClick={() => setMenuOpen(false)}
-                  className={`
-                    cursor-pointer transition-colors duration-300
-                    ${
-                      menuOpen
-                        ? "text-white hover:text-gray-400"
-                        : "text-black hover:text-[#929292]"
-                    }
-                  `}
-                >
-                  {item}
-                </a>
-              </li>
-            ),
-          )}
+          {menuItems.map((item, index) => (
+            <li key={index}>
+              <a
+                href={item.href}
+                onClick={() => setMenuOpen(false)}
+                className={`
+                  cursor-pointer transition-colors duration-300
+                  ${
+                    menuOpen
+                      ? "text-white hover:text-gray-400"
+                      : "text-black hover:text-[#929292]"
+                  }
+                `}
+              >
+                {item.label}
+              </a>
+            </li>
+          ))}
+
           <button
             onClick={() =>
               handleExternalNavigation("https://wa.me/5524993215864")

@@ -7,7 +7,7 @@ const ContactButton = ({ text, onClick, className = "" }) => {
       className={`
         px-6 py-2 rounded-full transition-all duration-300
         bg-black text-white
-        hover:bg-transparent hover:text-black hover:border hover:border-black
+        hover:bg-transparent hover:text-black hover:border hover:border-black cursor-pointer
         ${className}
       `}
     >

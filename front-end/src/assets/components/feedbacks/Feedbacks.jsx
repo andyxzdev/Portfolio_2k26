@@ -1,31 +1,35 @@
 import React, { useEffect, useRef, useState } from "react";
-import Img from "../../logo/clients/bravo.jpg";
+import Img1 from "../../images/imagem1.png";
+import Img2 from "../../images/imagem2.png";
+import Img3 from "../../images/imagem3.png";
+import Img4 from "../../images/imagem4.png";
+import Img5 from "../../images/imagem5.png";
 
 const feedbacks = [
   {
-    name: "Carlos Andrade",
+    name: "Flaviano Silva",
     text: "Precisava de um site profissional para minha empresa e o resultado superou minhas expectativas. O design ficou moderno, rápido e já comecei a receber novos contatos na primeira semana.",
-    avatar: Img,
+    avatar: Img2,
   },
   {
-    name: "Fernanda Souza",
+    name: "Wesley Rodrigues",
     text: "Meu site antigo não convertia nada. Depois do novo layout e melhorias de UX, comecei a ter muito mais leads entrando pelo formulário e WhatsApp.",
-    avatar: Img,
+    avatar: Img3,
   },
   {
-    name: "Lucas Martins",
+    name: "Lucas Aciole",
     text: "O projeto foi entregue no prazo e com uma qualidade excelente. O site ficou extremamente rápido e bem otimizado para SEO, o que já melhorou meu posicionamento no Google.",
-    avatar: Img,
+    avatar: Img1,
   },
   {
-    name: "Juliana Ribeiro",
+    name: "Anna Barreto",
     text: "Trabalho impecável. Além de desenvolver o site, também me ajudou com a estrutura e organização do conteúdo, o que fez toda diferença na apresentação da minha marca.",
-    avatar: Img,
+    avatar: Img4,
   },
   {
-    name: "Rafael Oliveira",
+    name: "Vitória Dias",
     text: "Precisava de uma landing page para campanha e o resultado foi direto ao ponto: layout limpo, carregamento rápido e ótima conversão.",
-    avatar: Img,
+    avatar: Img5,
   },
 ];
 
@@ -54,7 +58,10 @@ const Feedbacks = () => {
   }, [index]);
 
   return (
-    <section className="w-full py-20 px-6 md:px-16 bg-[#111111] text-white">
+    <section
+      id="feedbacks"
+      className="w-full py-20 px-6 md:px-16 bg-[#111111] text-white"
+    >
       <div className="text-center mb-12">
         <h1 className="text-3xl md:text-4xl mb-4">O que meus clientes dizem</h1>
         <p className="text-gray-400 max-w-2xl mx-auto">

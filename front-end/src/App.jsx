@@ -1,6 +1,10 @@
 import React from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
+import { Globe, Smartphone, PenTool, Server } from "lucide-react";
+
+import { useState, useEffect } from "react";
+import Loading from "./assets/components/loading_page/Loading.jsx";
 
 import Carrossel_Text from "./assets/components/carrossel_Text/Carrossel_Text";
 import Header from "./assets/components/header/Header";
@@ -11,9 +15,11 @@ import ImgSolucoes from "./assets/arts/asset_solucoes.png";
 import Img_Front_Back from "./assets/arts/art-front-back.png";
 import Banner_Front_Back from "./assets/banners/banner-front-ao-back.jpg";
 import Arte_Sobre from "./assets/arts/arte-sobre.png";
-import ImgProject from "./assets/banners/banner-front-ao-back.jpg";
+import ImgProject1 from "./assets/banners/p1.jpg";
+import ImgProject2 from "./assets/banners/p2.jpg";
+import ImgProject3 from "./assets/banners/p3.jpg";
+import ImgProject4 from "./assets/banners/p4.jpg";
 
-import { Globe, Smartphone, PenTool, Server } from "lucide-react";
 import LogosReact from "./assets/logo/react.svg";
 import LogosNode from "./assets/logo/node.svg";
 import LogosTailwind from "./assets/logo/tailwind.svg";
@@ -28,6 +34,16 @@ import Footer from "./assets/components/footer/Footer.jsx";
 import Spline from "@splinetool/react-spline";
 
 const App = () => {
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 1000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   const handleContact = () => {
     window.open("https://wa.me/5524993215864", "_blank");
   };
@@ -39,7 +55,11 @@ const App = () => {
     offset: ["start end", "end start"],
   });
 
-  const rotate = useTransform(scrollYProgress, [0, 1], [-165, 155]);
+  const rotate = useTransform(scrollYProgress, [0, 1], [-230, 400]);
+
+  if (loading) {
+    return <Loading />;
+  }
 
   return (
     <main className="overflow-hidden">
@@ -95,7 +115,10 @@ const App = () => {
         </div>
       </section>
 
-      <section className="w-full flex flex-col xl:flex-row xl:items-center px-4 md:px-8 xl:px-16 bg-black lg:text-right">
+      <section
+        id="sobre"
+        className="w-full flex flex-col xl:flex-row xl:items-center px-4 md:px-8 xl:px-16 bg-black lg:text-right"
+      >
         <div className="flex flex-col lg:flex-row w-full py-10 md:py-10 lg:pt-10">
           <motion.div>
             <img src={Arte_Sobre} alt="imagem sobre andy" className="w-auto" />
@@ -161,6 +184,7 @@ const App = () => {
 
       <section
         ref={ref}
+        id="servicos"
         className="w-full flex flex-col xl:flex-row xl:items-center px-4 md:px-8 xl:px-16 py-10"
       >
         <div className="w-full">
@@ -270,6 +294,7 @@ const App = () => {
       <Carrossel_Text />
 
       <section
+        id="tecnologias"
         className="w-full flex flex-col xl:flex-row items-center px-4 md:px-8 xl:px-16 py-16 xl:py-0 bg-cover bg-center bg-no-repeat text-left min-h-screen xl:h-[120vh]"
         style={{ backgroundImage: `url(${Banner_Front_Back})` }}
       >
@@ -338,7 +363,7 @@ const App = () => {
         </div>
       </section>
 
-      <section className="w-full h-auto pb-25">
+      <section id="projetos" className="w-full h-auto pb-25">
         <div className="text-center items-center justify-center">
           <motion.h1
             initial={{ opacity: 0, x: -40 }}
@@ -360,28 +385,39 @@ const App = () => {
         <div className=" flex flex-col lg:flex-row items-center justify-evenly px-7 pt-8 gap-10">
           <div className="w-auto h-auto bg-[#d4d4d4] px-4 py-4 rounded-2xl ">
             <div className="w-full">
-              <img src={ImgProject} alt="" className="rounded-2xl" />
+              <img src={ImgProject1} alt="" className="rounded-2xl" />
             </div>
 
             <div className="pl-2 py-5">
-              <h1 className="text-black 2xl:text-[1.5rem]">
-                Site institucional
-              </h1>
+              <h1 className="text-black 2xl:text-[1.5rem]">Landing Page</h1>
               <h2 className="text-black mt-4 2xl:text-[1.3rem]">
-                Barreto & Santana adv
+                ZipRecruiter Newsletter
               </h2>
               <h3 className="text-black mt-4">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est
-                cupiditate at voluptates explicabo similique. Odit praesentium
-                magni fugit unde, veniam nam nemo, nisi magnam sunt ipsum cumque
-                modi, tempore quibusdam?
+                Este projeto é uma landing page moderna desenvolvida para a
+                ZipRecruiter, com foco em inscrição na newsletter e engajamento
+                do usuário. A página foi projetada para conectar profissionais a
+                oportunidades de trabalho globais, oferecendo insights, dicas de
+                carreira e tendências do mercado diretamente no e-mail. Com uma
+                interface limpa, chamadas para ação estratégicas e foco na
+                experiência do usuário, o objetivo é gerar valor, aumentar
+                conversões e construir um relacionamento contínuo com os
+                usuários.
               </h3>
-              <ContactButton text={"LALALALA"} className="mt-7" />
+              {/* <ContactButton text={"Ver projeto"} className="mt-7" /> */}
+              <a
+                href="https://github.com/andyxzdev/ZipRecruiter_Newslatter_LandingPage"
+                target="_blank"
+              >
+                <button className="px-6 py-2 rounded-full transition-all duration-300 bg-black text-white hover:bg-transparent hover:text-black hover:border hover:border-black cursor-pointer mt-7">
+                  Ver Projeto
+                </button>
+              </a>
             </div>
           </div>
           <div className="w-[auto] h-auto bg-[#d4d4d4] px-4 py-4 rounded-2xl ">
             <div className="w-full">
-              <img src={ImgProject} alt="" className="rounded-2xl" />
+              <img src={ImgProject2} alt="" className="rounded-2xl" />
             </div>
 
             <div className="pl-2 py-5">
@@ -392,38 +428,57 @@ const App = () => {
                 Barreto & Santana adv
               </h2>
               <h3 className="text-black mt-4">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est
-                cupiditate at voluptates explicabo similique. Odit praesentium
-                magni fugit unde, veniam nam nemo, nisi magnam sunt ipsum cumque
-                modi, tempore quibusdam?
+                Este projeto é um site institucional moderno desenvolvido para o
+                escritório Barreto & Santana Advocacia, de Belo Horizonte (MG),
+                com foco em transmitir credibilidade, profissionalismo e clareza
+                na comunicação. A página foi estruturada para apresentar as
+                áreas de atuação, diferenciais do escritório, depoimentos de
+                clientes e um canal direto de contato. Com um layout responsivo,
+                interface limpa e navegação intuitiva, o objetivo é fortalecer a
+                presença digital, gerar confiança e potencializar a captação de
+                novos clientes.
               </h3>
-              <ContactButton text={"LALALALA"} className="mt-7" />
+              <a href="https://barretoesantana.adv.br/" target="_blank">
+                <button className="px-6 py-2 rounded-full transition-all duration-300 bg-black text-white hover:bg-transparent hover:text-black hover:border hover:border-black cursor-pointer mt-7">
+                  Ver Projeto
+                </button>
+              </a>
             </div>
           </div>
           <div className="w-[auto] h-auto bg-[#d4d4d4] px-4 py-4 rounded-2xl ">
             <div className="w-full">
-              <img src={ImgProject} alt="" className="rounded-2xl" />
+              <img src={ImgProject3} alt="" className="rounded-2xl" />
             </div>
 
             <div className="pl-2 py-5">
-              <h1 className="text-black 2xl:text-[1.5rem]">
-                Site institucional
-              </h1>
+              <h1 className="text-black 2xl:text-[1.5rem]">Landing Page</h1>
               <h2 className="text-black mt-4 2xl:text-[1.3rem]">
-                Barreto & Santana adv
+                Comunidade Alta Performance Integral
               </h2>
               <h3 className="text-black mt-4">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est
-                cupiditate at voluptates explicabo similique. Odit praesentium
-                magni fugit unde, veniam nam nemo, nisi magnam sunt ipsum cumque
-                modi, tempore quibusdam?
+                Este projeto é uma landing page moderna desenvolvida para a
+                Comunidade de Alta Performance Integral, com foco em conversão e
+                conexão com o público. A página foi estruturada para apresentar
+                de forma clara o valor da comunidade, conduzindo o usuário por
+                uma jornada estratégica desde a identificação de suas dores até
+                a decisão de compra. Com uma interface limpa, linguagem
+                humanizada e foco na experiência do usuário, o objetivo é gerar
+                engajamento, fortalecer a confiança e direcionar o usuário para
+                a plataforma da Hotmart.
               </h3>
-              <ContactButton text={"LALALALA"} className="mt-7" />
+              <a
+                href="https://www.altaperformanceintegral.com.br/"
+                target="_blank"
+              >
+                <button className="px-6 py-2 rounded-full transition-all duration-300 bg-black text-white hover:bg-transparent hover:text-black hover:border hover:border-black cursor-pointer mt-7">
+                  Ver Projeto
+                </button>
+              </a>
             </div>
           </div>
           <div className="w-[auto] h-auto bg-[#d4d4d4] px-4 py-4 rounded-2xl ">
             <div className="w-full">
-              <img src={ImgProject} alt="" className="rounded-2xl" />
+              <img src={ImgProject4} alt="" className="rounded-2xl" />
             </div>
 
             <div className="pl-2 py-5">
@@ -431,15 +486,27 @@ const App = () => {
                 Site institucional
               </h1>
               <h2 className="text-black mt-4 2xl:text-[1.3rem]">
-                Barreto & Santana adv
+                Bravo Construções
               </h2>
               <h3 className="text-black mt-4">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est
-                cupiditate at voluptates explicabo similique. Odit praesentium
-                magni fugit unde, veniam nam nemo, nisi magnam sunt ipsum cumque
-                modi, tempore quibusdam?
+                DEste projeto é um site institucional moderno desenvolvido para
+                a Bravo Construções, com foco na modernização da presença
+                digital e na clareza da comunicação dos serviços. A página foi
+                estruturada para apresentar os serviços, projetos realizados e
+                diferenciais da empresa de forma estratégica e objetiva. Com uma
+                interface limpa, navegação intuitiva e foco na experiência do
+                usuário, o objetivo é transmitir profissionalismo, gerar
+                confiança e fortalecer a autoridade da marca no setor da
+                construção civil.
               </h3>
-              <ContactButton text={"LALALALA"} className="mt-7" />
+              <a
+                href="https://github.com/andyxzdev?tab=repositories"
+                target="_blank"
+              >
+                <button className="px-6 py-2 rounded-full transition-all duration-300 bg-black text-white hover:bg-transparent hover:text-black hover:border hover:border-black cursor-pointer mt-7">
+                  Ver Projeto
+                </button>
+              </a>
             </div>
           </div>
         </div>
