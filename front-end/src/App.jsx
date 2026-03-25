@@ -176,7 +176,10 @@ const App = () => {
                 resultado.
               </motion.h2>
 
-              <ContactButton2 text={"Faça um orçamento"} />
+              <ContactButton2
+                text={"Faça um orçamento"}
+                onClick={handleContact}
+              />
             </div>
           </div>
         </div>
@@ -213,7 +216,10 @@ const App = () => {
                 posicionarem melhor na internet e conquistarem mais clientes.
               </motion.h2>
 
-              <ContactButton text={"Quero um orçamento"} />
+              <ContactButton
+                text={"Quero um orçamento"}
+                onClick={handleContact}
+              />
             </div>
 
             {/* IMAGEM */}
@@ -332,7 +338,7 @@ const App = () => {
             escalabilidade e segurança.
           </motion.h2>
 
-          <ContactButton2 text={"Saiba mais"} />
+          <ContactButton2 text={"Saiba mais"} onClick={handleContact} />
         </div>
 
         {/* IMAGEM */}

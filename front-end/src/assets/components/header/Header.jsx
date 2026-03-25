@@ -99,7 +99,7 @@ const Header = () => {
               handleExternalNavigation("https://wa.me/5524993215864")
             }
             className={`
-              px-6 py-2 rounded-full transition-all duration-300
+              px-6 py-2 rounded-full transition-all duration-300 cursor-pointer
               ${
                 menuOpen
                   ? "bg-white text-black hover:bg-transparent hover:border hover:border-white hover:text-white"
