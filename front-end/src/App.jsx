@@ -481,7 +481,7 @@ const App = () => {
               </h3>
               {/* <ContactButton text={"Ver projeto"} className="mt-7" /> */}
               <a
-                href="https://github.com/andyxzdev/ZipRecruiter_Newslatter_LandingPage"
+                href="https://zip-recruiter-newslatter-landing-pa.vercel.app/"
                 target="_blank"
               >
                 <button className="px-6 py-2 rounded-full transition-all duration-300 bg-black text-white hover:bg-transparent hover:text-black hover:border hover:border-black cursor-pointer mt-7">
