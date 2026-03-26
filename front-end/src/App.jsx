@@ -79,7 +79,7 @@ const App = () => {
         </div>
 
         <div className="absolute inset-0 z-10 flex items-start lg:items-center justify-start pt-50 lg:pt-40 px-4 md:px-8 pointer-events-none">
-          <div className="w-full text-center md:text-left lg:max-w-[40%] lg:px-16 xl:px-24 flex flex-col gap-4 md:gap-6">
+          <div className="w-full text-center md:text-left lg:max-w-[40%] lg:mb-20 xl:mb-65  2xl:mb-50 lg:px-16 xl:px-24 flex flex-col gap-4 md:gap-6">
             <div className="flex justify-center lg:justify-start">
               <img
                 src={Logo_hero}
