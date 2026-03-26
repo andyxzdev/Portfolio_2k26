@@ -1,9 +1,14 @@
-import React from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+import React, {
+  useRef,
+  lazy,
+  Suspense,
+  memo,
+  useState,
+  useEffect,
+} from "react";
 import { Globe, Smartphone, PenTool, Server } from "lucide-react";
 
-import { useState, useEffect } from "react";
 import Loading from "./assets/components/loading_page/Loading.jsx";
 
 import Carrossel_Text from "./assets/components/carrossel_Text/Carrossel_Text";
@@ -36,7 +41,38 @@ import Feedbacks from "./assets/components/feedbacks/Feedbacks.jsx";
 import Forms from "./assets/components/forms/Forms.jsx";
 import Footer from "./assets/components/footer/Footer.jsx";
 
-import Spline from "@splinetool/react-spline";
+const Spline = lazy(() => import("@splinetool/react-spline"));
+
+const SplineScene = memo(() => {
+  const splineRef = useRef(null);
+  const frame = useRef(null);
+
+  const handleMouseMove = (e) => {
+    if (!splineRef.current) return;
+    if (frame.current) return;
+
+    frame.current = requestAnimationFrame(() => {
+      const { clientX, clientY } = e;
+
+      splineRef.current.emitEvent("mouseMove", {
+        x: clientX,
+        y: clientY,
+      });
+
+      frame.current = null;
+    });
+  };
+
+  return (
+    <div onMouseMove={handleMouseMove} className="w-full h-full">
+      <Spline
+        ref={splineRef}
+        scene="https://prod.spline.design/pG06XrIod30UMvEf/scene.splinecode"
+        className="lg:left-16"
+      />
+    </div>
+  );
+});
 
 const App = () => {
   const [loading, setLoading] = useState(true);
@@ -62,6 +98,13 @@ const App = () => {
 
   const rotate = useTransform(scrollYProgress, [0, 1], [-230, 400]);
 
+  const [showSpline, setShowSpline] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setShowSpline(true), 400);
+    return () => clearTimeout(timer);
+  }, []);
+
   if (loading) {
     return <Loading />;
   }
@@ -71,11 +114,8 @@ const App = () => {
       <section className="relative w-full h-auto">
         <Carrossel_Text />
         <Header />
-        <div className="w-full h-[150vh] md:h-[100vh] xl:h-[130vh] pt-100 lg:pt-0 lg:ml-70">
-          <Spline
-            scene="https://prod.spline.design/pG06XrIod30UMvEf/scene.splinecode"
-            className="lg:left-16"
-          />
+        <div className="w-full h-[150vh] md:h-[100vh] xl:h-[130vh] pt-100 lg:pt-0 lg:ml-70 transform-gpu will-change-transform">
+          <Suspense fallback={null}>{showSpline && <SplineScene />}</Suspense>
         </div>
 
         <div className="absolute inset-0 z-10 flex items-start lg:items-center justify-start pt-50 lg:pt-40 px-4 md:px-8 pointer-events-none">
