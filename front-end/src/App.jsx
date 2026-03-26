@@ -25,6 +25,11 @@ import LogosNode from "./assets/logo/node.svg";
 import LogosTailwind from "./assets/logo/tailwind.svg";
 import LogosFigma from "./assets/logo/figma.svg";
 import LogosPhotoshop from "./assets/logo/photoshop.svg";
+import Logo_hero from "./assets/logo/logo_hero.png";
+
+import S1 from "./assets/social/instagram.svg";
+import S2 from "./assets/social/linkedin.svg";
+import S3 from "./assets/social/github.svg";
 
 import Carrossel_Images from "./assets/components/carrossel_Images/Carrossel_Images";
 import Feedbacks from "./assets/components/feedbacks/Feedbacks.jsx";
@@ -66,7 +71,7 @@ const App = () => {
       <section className="relative w-full h-auto">
         <Carrossel_Text />
         <Header />
-        <div className="w-full h-[120vh] md:h-[100vh] xl:h-[130vh] pt-70 lg:pt-0 lg:ml-70">
+        <div className="w-full h-[150vh] md:h-[100vh] xl:h-[130vh] pt-100 lg:pt-0 lg:ml-70">
           <Spline
             scene="https://prod.spline.design/pG06XrIod30UMvEf/scene.splinecode"
             className="lg:left-16"
@@ -75,6 +80,13 @@ const App = () => {
 
         <div className="absolute inset-0 z-10 flex items-start lg:items-center justify-start pt-50 lg:pt-40 px-4 md:px-8 pointer-events-none">
           <div className="w-full text-center md:text-left lg:max-w-[40%] lg:px-16 xl:px-24 flex flex-col gap-4 md:gap-6">
+            <div className="flex justify-center lg:justify-start">
+              <img
+                src={Logo_hero}
+                alt="logo andy dev"
+                className="w-30 lg:w-40"
+              />
+            </div>
             <motion.h1
               initial={{ opacity: 0, x: -40 }}
               animate={{ opacity: 1, x: 0 }}
@@ -102,6 +114,23 @@ const App = () => {
               Crio interfaces modernas, responsivas e focadas em conversão para
               ajudar seu negócio a crescer no digital.
             </motion.p>
+
+            <div className="flex justify-center lg:justify-start gap-12 pointer-events-auto">
+              <a href="https://www.instagram.com/andyxdev_/" target="_blank">
+                <img src={S1} alt="icon instagram" className="w-6 lg:w-7" />
+              </a>
+
+              <a href="https://www.linkedin.com/in/andrewsdev/" target="_blank">
+                <img src={S2} alt="icon linkedin" className="w-6 lg:w-7" />
+              </a>
+
+              <a
+                href="https://github.com/andyxzdev?tab=repositories"
+                target="_blank"
+              >
+                <img src={S3} alt="icon github" className="w-6 lg:w-7" />
+              </a>
+            </div>
 
             <motion.div
               initial={{ opacity: 0, y: 40 }}
@@ -388,7 +417,7 @@ const App = () => {
           <img src={LogosFigma} alt="" className="w-10" />
           <img src={LogosPhotoshop} alt="" className="w-15" />
         </div>
-        <div className=" flex flex-col lg:flex-row items-center justify-evenly px-7 pt-8 gap-10">
+        <div className=" flex flex-col lg:flex-row items-center justify-evenly px-7 pt-8 lg:gap-5 2xl:gap-10">
           <div className="w-auto h-auto bg-[#d4d4d4] px-4 py-4 rounded-2xl ">
             <div className="w-full">
               <img src={ImgProject1} alt="" className="rounded-2xl" />
@@ -400,7 +429,7 @@ const App = () => {
                 ZipRecruiter Newsletter
               </h2>
               <h3 className="text-black mt-4">
-                Este projeto é uma landing page moderna desenvolvida para a
+                Este projeto é uma landing page desenvolvida para a
                 ZipRecruiter, com foco em inscrição na newsletter e engajamento
                 do usuário. A página foi projetada para conectar profissionais a
                 oportunidades de trabalho globais, oferecendo insights, dicas de
@@ -434,7 +463,7 @@ const App = () => {
                 Barreto & Santana adv
               </h2>
               <h3 className="text-black mt-4">
-                Este projeto é um site institucional moderno desenvolvido para o
+                Este projeto é um site institucional desenvolvido para o
                 escritório Barreto & Santana Advocacia, de Belo Horizonte (MG),
                 com foco em transmitir credibilidade, profissionalismo e clareza
                 na comunicação. A página foi estruturada para apresentar as
@@ -462,13 +491,13 @@ const App = () => {
                 Comunidade Alta Performance Integral
               </h2>
               <h3 className="text-black mt-4">
-                Este projeto é uma landing page moderna desenvolvida para a
-                Comunidade de Alta Performance Integral, com foco em conversão e
-                conexão com o público. A página foi estruturada para apresentar
-                de forma clara o valor da comunidade, conduzindo o usuário por
-                uma jornada estratégica desde a identificação de suas dores até
-                a decisão de compra. Com uma interface limpa, linguagem
-                humanizada e foco na experiência do usuário, o objetivo é gerar
+                Este projeto é uma landing page desenvolvida para a Comunidade
+                de Alta Performance Integral, com foco em conversão e conexão
+                com o público. A página foi estruturada para apresentar de forma
+                clara o valor da comunidade, conduzindo o usuário por uma
+                jornada estratégica desde a identificação de suas dores até a
+                decisão de compra. Com uma interface limpa, linguagem humanizada
+                e foco na experiência do usuário, o objetivo é gerar
                 engajamento, fortalecer a confiança e direcionar o usuário para
                 a plataforma da Hotmart.
               </h3>
@@ -495,15 +524,14 @@ const App = () => {
                 Bravo Construções
               </h2>
               <h3 className="text-black mt-4">
-                DEste projeto é um site institucional moderno desenvolvido para
-                a Bravo Construções, com foco na modernização da presença
-                digital e na clareza da comunicação dos serviços. A página foi
-                estruturada para apresentar os serviços, projetos realizados e
-                diferenciais da empresa de forma estratégica e objetiva. Com uma
-                interface limpa, navegação intuitiva e foco na experiência do
-                usuário, o objetivo é transmitir profissionalismo, gerar
-                confiança e fortalecer a autoridade da marca no setor da
-                construção civil.
+                Este projeto é um site institucional desenvolvido para a Bravo
+                Construções, com foco na modernização da presença digital e na
+                clareza da comunicação dos serviços. A página foi estruturada
+                para apresentar os serviços, projetos realizados e diferenciais
+                da empresa de forma estratégica e objetiva. Com uma interface
+                limpa, navegação intuitiva e foco na experiência do usuário, o
+                objetivo é transmitir profissionalismo, gerar confiança e
+                fortalecer a autoridade da marca no setor da construção civil.
               </h3>
               <a
                 href="https://github.com/andyxzdev?tab=repositories"

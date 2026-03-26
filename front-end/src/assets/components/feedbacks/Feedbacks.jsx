@@ -65,7 +65,7 @@ const Feedbacks = () => {
       <div className="text-center mb-12">
         <h1 className="text-3xl md:text-4xl mb-4">O que meus clientes dizem</h1>
         <p className="text-gray-400 max-w-2xl mx-auto">
-          Resultados reais de empresas que confiaram no meu trabalho para
+          Depoimentos reais de pessoas que confiaram no meu trabalho para
           crescer no digital.
         </p>
       </div>

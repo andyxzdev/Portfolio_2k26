@@ -24,10 +24,7 @@ const Forms = () => {
     setLoading(true);
 
     try {
-      await axios.post(
-        "https://lavender-sandpiper-807721.hostingersite.com/api/contato",
-        formData,
-      );
+      await axios.post("https:www.andyxdev.com.br/api/contato", formData);
 
       alert("Mensagem enviada com sucesso 🚀");
 
