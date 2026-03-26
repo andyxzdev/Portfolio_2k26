@@ -24,7 +24,7 @@ const Forms = () => {
     setLoading(true);
 
     try {
-      await axios.post("https:www.andyxdev.com.br/api/contato", formData);
+      await axios.post("https://www.andyxdev.com.br/api/contato", formData);
 
       alert("Mensagem enviada com sucesso 🚀");
 
