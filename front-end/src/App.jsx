@@ -45,26 +45,34 @@ const Spline = lazy(() => import("@splinetool/react-spline"));
 
 const SplineScene = memo(() => {
   const splineRef = useRef(null);
-  const frame = useRef(null);
+  const lastTime = useRef(0);
+  const [active, setActive] = useState(false);
 
   const handleMouseMove = (e) => {
+    const now = performance.now();
+
+    // limita pra ~30fps (MUITO mais leve)
+    if (now - lastTime.current < 33) return;
+
+    lastTime.current = now;
+
     if (!splineRef.current) return;
-    if (frame.current) return;
 
-    frame.current = requestAnimationFrame(() => {
-      const { clientX, clientY } = e;
+    const { clientX, clientY } = e;
 
-      splineRef.current.emitEvent("mouseMove", {
-        x: clientX,
-        y: clientY,
-      });
-
-      frame.current = null;
+    splineRef.current.emitEvent("mouseMove", {
+      x: clientX,
+      y: clientY,
     });
   };
 
   return (
-    <div onMouseMove={handleMouseMove} className="w-full h-full">
+    <div
+      onMouseEnter={() => setActive(true)}
+      onMouseLeave={() => setActive(false)}
+      onMouseMove={active ? handleMouseMove : undefined}
+      className="w-full h-full"
+    >
       <Spline
         ref={splineRef}
         scene="https://prod.spline.design/pG06XrIod30UMvEf/scene.splinecode"
