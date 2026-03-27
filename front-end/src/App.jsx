@@ -73,11 +73,11 @@ const SplineScene = memo(() => {
       onMouseMove={active ? handleMouseMove : undefined}
       className="w-full h-full"
     >
-      <Spline
+      {/* <Spline
         ref={splineRef}
         scene="https://prod.spline.design/pG06XrIod30UMvEf/scene.splinecode"
         className="lg:left-16"
-      />
+      /> */}
     </div>
   );
 });
