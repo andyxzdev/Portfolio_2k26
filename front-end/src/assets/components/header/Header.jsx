@@ -27,7 +27,6 @@ const Header = () => {
     window.open(url, "_blank");
   };
 
-  // ✅ NOVO: links com ids reais
   const menuItems = [
     { label: "Início", href: "#" },
     { label: "Sobre", href: "#sobre" },
@@ -39,7 +38,7 @@ const Header = () => {
 
   return (
     <header className="w-full h-20 flex items-center justify-between px-8 absolute z-50">
-      <img src={LogoTopo} alt="Logo-topo" className="w-20 h-20" />
+      <img src={LogoTopo} alt="Logo-topo" className="w-11 h-auto" />
 
       {/* Botão Mobile */}
       <button

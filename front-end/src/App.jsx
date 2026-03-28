@@ -37,50 +37,33 @@ import S2 from "./assets/social/linkedin.svg";
 import S3 from "./assets/social/github.svg";
 
 import Carrossel_Images from "./assets/components/carrossel_Images/Carrossel_Images";
+// import Carrossel_Images_Hero from "./assets/components/carrossel_img_hero/Carrossel_imgs_hero.jsx";
 import Feedbacks from "./assets/components/feedbacks/Feedbacks.jsx";
 import Forms from "./assets/components/forms/Forms.jsx";
 import Footer from "./assets/components/footer/Footer.jsx";
 
-const Spline = lazy(() => import("@splinetool/react-spline"));
+import Video_hero from "./assets/video/videohero.mp4";
 
-const SplineScene = memo(() => {
-  const splineRef = useRef(null);
-  const lastTime = useRef(0);
-  const [active, setActive] = useState(false);
+// const Spline = lazy(() => import("@splinetool/react-spline"));
 
-  const handleMouseMove = (e) => {
-    const now = performance.now();
+// const SplineScene = memo(() => {
+//   const [active, setActive] = useState(false);
 
-    // limita pra ~30fps (MUITO mais leve)
-    if (now - lastTime.current < 33) return;
-
-    lastTime.current = now;
-
-    if (!splineRef.current) return;
-
-    const { clientX, clientY } = e;
-
-    splineRef.current.emitEvent("mouseMove", {
-      x: clientX,
-      y: clientY,
-    });
-  };
-
-  return (
-    <div
-      onMouseEnter={() => setActive(true)}
-      onMouseLeave={() => setActive(false)}
-      onMouseMove={active ? handleMouseMove : undefined}
-      className="w-full h-full"
-    >
-      {/* <Spline
-        ref={splineRef}
-        scene="https://prod.spline.design/pG06XrIod30UMvEf/scene.splinecode"
-        className="lg:left-16"
-      /> */}
-    </div>
-  );
-});
+//   return (
+//     <div
+//       onMouseEnter={() => setActive(true)}
+//       onMouseLeave={() => setActive(false)}
+//       className="w-full h-full"
+//     >
+//       {active && (
+//         <Spline
+//           scene="https://prod.spline.design/pG06XrIod30UMvEf/scene.splinecode"
+//           className="lg:left-16"
+//         />
+//       )}
+//     </div>
+//   );
+// });
 
 const App = () => {
   const [loading, setLoading] = useState(true);
@@ -106,7 +89,7 @@ const App = () => {
 
   const rotate = useTransform(scrollYProgress, [0, 1], [-230, 400]);
 
-  const [showSpline, setShowSpline] = useState(false);
+  // const [showSpline, setShowSpline] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => setShowSpline(true), 400);
@@ -119,75 +102,94 @@ const App = () => {
 
   return (
     <main className="overflow-hidden">
-      <section className="relative w-full h-auto">
+      <section className="relative w-full overflow-hidden">
         <Carrossel_Text />
         <Header />
-        <div className="w-full h-[150vh] md:h-[100vh] xl:h-[130vh] pt-100 lg:pt-0 lg:ml-70 transform-gpu will-change-transform">
-          <Suspense fallback={null}>{showSpline && <SplineScene />}</Suspense>
-        </div>
 
-        <div className="absolute inset-0 z-10 flex items-start lg:items-center justify-start pt-50 lg:pt-40 px-4 md:px-8 pointer-events-none">
-          <div className="w-full text-center md:text-left lg:max-w-[40%] lg:mb-20 xl:mb-65  2xl:mb-50 lg:px-16 xl:px-24 flex flex-col gap-4 md:gap-6">
+        {/* CONTAINER PRINCIPAL */}
+        <div className="relative flex flex-col lg:flex-row items-center justify-between px-4 md:px-8 lg:px-16 gap-10 lg:gap-0 pt-32 lg:pt-0 lg:h-[100vh] xl:h-[105vh] 2xl:h-[auto]">
+          {/* ESQUERDA (TEXTO) */}
+          <div className="w-full lg:w-[50%] xl:w-[45%] text-center lg:text-left flex flex-col gap-4 md:gap-6">
+            {/* LOGO */}
             <div className="flex justify-center lg:justify-start">
               <img
                 src={Logo_hero}
                 alt="logo andy dev"
-                className="w-30 lg:w-40"
+                className="w-28 md:w-32 lg:w-40"
               />
             </div>
+
+            {/* TITULO */}
             <motion.h1
               initial={{ opacity: 0, x: -40 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.2, duration: 0.6 }}
-              className="text-2xl sm:text-3xl md:text-4xl lg:text-[2.2rem] xl:text-4xl 2xl:text-[3rem] leading-tight bg-[#FFFFFF] lg:bg-transparent"
+              className="text-2xl sm:text-3xl md:text-4xl lg:text-[2.2rem] xl:text-4xl 2xl:text-[3rem] leading-tight"
             >
               Desenvolvimento Web e Mobile
             </motion.h1>
 
+            {/* SUBTITULO */}
             <motion.h2
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3, duration: 0.6 }}
-              className="font-bold text-sm sm:text-base md:text-lg lg:text-base xl:text-[1rem] 2xl:text-[2rem] bg-[#FFFFFF] lg:bg-transparent"
+              className="font-bold text-sm sm:text-base md:text-lg lg:text-base xl:text-[1rem] 2xl:text-[2rem]"
             >
               que transforma ideias em produtos digitais
             </motion.h2>
 
+            {/* DESCRIÇÃO */}
             <motion.p
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5, duration: 0.6 }}
-              className="text-black text-sm sm:text-base md:text-lg lg:text-sm xl:text-base 2xl:text-[1.3rem] bg-[#FFFFFF] lg:bg-transparent"
+              className="text-black text-sm sm:text-base md:text-lg lg:text-sm xl:text-base 2xl:text-[1.3rem]"
             >
               Crio interfaces modernas, responsivas e focadas em conversão para
               ajudar seu negócio a crescer no digital.
             </motion.p>
 
-            <div className="flex justify-center lg:justify-start gap-12 pointer-events-auto">
+            {/* REDES */}
+            <div className="flex justify-center lg:justify-start gap-8 md:gap-10">
               <a href="https://www.instagram.com/andyxdev_/" target="_blank">
-                <img src={S1} alt="icon instagram" className="w-6 lg:w-7" />
+                <img src={S1} alt="instagram" className="w-5 md:w-6 lg:w-7" />
               </a>
 
               <a href="https://www.linkedin.com/in/andrewsdev/" target="_blank">
-                <img src={S2} alt="icon linkedin" className="w-6 lg:w-7" />
+                <img src={S2} alt="linkedin" className="w-5 md:w-6 lg:w-7" />
               </a>
 
               <a
                 href="https://github.com/andyxzdev?tab=repositories"
                 target="_blank"
               >
-                <img src={S3} alt="icon github" className="w-6 lg:w-7" />
+                <img src={S3} alt="github" className="w-5 md:w-6 lg:w-7" />
               </a>
             </div>
 
+            {/* BOTÃO */}
             <motion.div
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.7, duration: 0.6 }}
-              className="pointer-events-auto"
             >
               <ContactButton text="Entrar em contato" onClick={handleContact} />
             </motion.div>
+          </div>
+
+          {/* DIREITA (VÍDEO) */}
+          <div className="w-full lg:w-[50%] xl:w-[45%] flex justify-center">
+            <div className="w-full max-w-[500px] md:max-w-[600px] lg:max-w-full rounded-2xl overflow-hidden">
+              <video
+                src={Video_hero}
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="w-full h-full object-cover"
+              />
+            </div>
           </div>
         </div>
       </section>
