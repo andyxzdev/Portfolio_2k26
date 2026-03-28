@@ -8,6 +8,7 @@ import React, {
   Suspense,
 } from "react";
 import { Globe, Smartphone, PenTool, Server } from "lucide-react";
+import { useInView } from "react-intersection-observer";
 
 import Loading from "./assets/components/loading_page/Loading.jsx";
 
@@ -72,6 +73,15 @@ const Footer = lazy(() => import("./assets/components/footer/Footer.jsx"));
 import Video_hero from "./assets/video/videohero.mp4";
 
 const App = () => {
+  // 👇 controle de visibilidade do vídeo
+  const { ref: inViewRef, inView } = useInView({
+    triggerOnce: false,
+    threshold: 0.3,
+  });
+
+  // 👇 referência direta do elemento <video>
+  const videoRef = useRef(null);
+
   const [loading, setLoading] = useState(true);
   const [showVideo, setShowVideo] = useState(false);
 
@@ -95,6 +105,24 @@ const App = () => {
     const timer = setTimeout(() => setShowVideo(true), 400);
     return () => clearTimeout(timer);
   }, []);
+
+  // 👇 controle play / pause automático do vídeo
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    if (inView) {
+      const playPromise = video.play();
+
+      if (playPromise !== undefined) {
+        playPromise.catch(() => {
+          // evita erro silencioso no mobile
+        });
+      }
+    } else {
+      video.pause();
+    }
+  }, [inView]);
 
   // evita recriação da função
   const handleContact = useCallback(() => {
@@ -203,17 +231,17 @@ const App = () => {
           {/* DIREITA (VÍDEO) */}
           <div className="w-full lg:w-[50%] xl:w-[45%] flex justify-center">
             <div className="w-full max-w-[500px] md:max-w-[600px] lg:max-w-full rounded-2xl overflow-hidden">
-              {showVideo && (
+              <div ref={inViewRef}>
                 <video
+                  ref={videoRef}
                   src={Video_hero}
-                  autoPlay
-                  loop
                   muted
+                  loop
                   playsInline
                   preload="none"
                   className="w-full h-full object-cover"
                 />
-              )}
+              </div>
             </div>
           </div>
         </div>
