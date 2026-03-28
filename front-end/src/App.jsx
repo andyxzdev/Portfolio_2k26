@@ -2,10 +2,10 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import React, {
   useRef,
   lazy,
-  Suspense,
-  memo,
   useState,
   useEffect,
+  useCallback,
+  Suspense,
 } from "react";
 import { Globe, Smartphone, PenTool, Server } from "lucide-react";
 
@@ -36,15 +36,10 @@ import S1 from "./assets/social/instagram.svg";
 import S2 from "./assets/social/linkedin.svg";
 import S3 from "./assets/social/github.svg";
 
-import Carrossel_Images from "./assets/components/carrossel_Images/Carrossel_Images";
-// import Carrossel_Images_Hero from "./assets/components/carrossel_img_hero/Carrossel_imgs_hero.jsx";
-import Feedbacks from "./assets/components/feedbacks/Feedbacks.jsx";
-import Forms from "./assets/components/forms/Forms.jsx";
-import Footer from "./assets/components/footer/Footer.jsx";
-
-import Video_hero from "./assets/video/videohero.mp4";
-
-// const Spline = lazy(() => import("@splinetool/react-spline"));
+// import Carrossel_Images from "./assets/components/carrossel_Images/Carrossel_Images";
+// import Feedbacks from "./assets/components/feedbacks/Feedbacks.jsx";
+// import Forms from "./assets/components/forms/Forms.jsx";
+// import Footer from "./assets/components/footer/Footer.jsx";
 
 // const SplineScene = memo(() => {
 //   const [active, setActive] = useState(false);
@@ -65,20 +60,20 @@ import Video_hero from "./assets/video/videohero.mp4";
 //   );
 // });
 
+const Carrossel_Images = lazy(
+  () => import("./assets/components/carrossel_Images/Carrossel_Images"),
+);
+const Feedbacks = lazy(
+  () => import("./assets/components/feedbacks/Feedbacks.jsx"),
+);
+const Forms = lazy(() => import("./assets/components/forms/Forms.jsx"));
+const Footer = lazy(() => import("./assets/components/footer/Footer.jsx"));
+
+import Video_hero from "./assets/video/videohero.mp4";
+
 const App = () => {
   const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, 1000);
-
-    return () => clearTimeout(timer);
-  }, []);
-
-  const handleContact = () => {
-    window.open("https://wa.me/5524993215864", "_blank");
-  };
+  const [showVideo, setShowVideo] = useState(false);
 
   const ref = useRef(null);
 
@@ -89,16 +84,24 @@ const App = () => {
 
   const rotate = useTransform(scrollYProgress, [0, 1], [-230, 400]);
 
-  // const [showSpline, setShowSpline] = useState(false);
-
+  // loading inicial
   useEffect(() => {
-    const timer = setTimeout(() => setShowSpline(true), 400);
+    const timer = setTimeout(() => setLoading(false), 1000);
     return () => clearTimeout(timer);
   }, []);
 
-  if (loading) {
-    return <Loading />;
-  }
+  // delay no vídeo (melhora LCP)
+  useEffect(() => {
+    const timer = setTimeout(() => setShowVideo(true), 400);
+    return () => clearTimeout(timer);
+  }, []);
+
+  // evita recriação da função
+  const handleContact = useCallback(() => {
+    window.open("https://wa.me/5524993215864", "_blank");
+  }, []);
+
+  if (loading) return <Loading />;
 
   return (
     <main className="overflow-hidden">
@@ -107,7 +110,7 @@ const App = () => {
         <Header />
 
         {/* CONTAINER PRINCIPAL */}
-        <div className="relative flex flex-col lg:flex-row items-center justify-between px-4 md:px-8 lg:px-16 gap-10 lg:gap-0 pt-32 lg:pt-0 lg:h-[100vh] xl:h-[105vh] 2xl:h-[auto]">
+        <div className="relative flex flex-col lg:flex-row items-center justify-between px-4 md:px-8 lg:px-16 gap-10 lg:gap-0 pt-32 lg:pt-0 lg:h-[100vh] xl:h-[105vh] 2xl:h-screen">
           {/* ESQUERDA (TEXTO) */}
           <div className="w-full lg:w-[50%] xl:w-[45%] text-center lg:text-left flex flex-col gap-4 md:gap-6">
             {/* LOGO */}
@@ -115,6 +118,7 @@ const App = () => {
               <img
                 src={Logo_hero}
                 alt="logo andy dev"
+                loading="eager"
                 className="w-28 md:w-32 lg:w-40"
               />
             </div>
@@ -153,18 +157,36 @@ const App = () => {
             {/* REDES */}
             <div className="flex justify-center lg:justify-start gap-8 md:gap-10">
               <a href="https://www.instagram.com/andyxdev_/" target="_blank">
-                <img src={S1} alt="instagram" className="w-5 md:w-6 lg:w-7" />
+                <img
+                  src={S1}
+                  alt="instagram"
+                  loading="lazy"
+                  decoding="async"
+                  className="w-5 md:w-6 lg:w-7"
+                />
               </a>
 
               <a href="https://www.linkedin.com/in/andrewsdev/" target="_blank">
-                <img src={S2} alt="linkedin" className="w-5 md:w-6 lg:w-7" />
+                <img
+                  src={S2}
+                  alt="linkedin"
+                  loading="lazy"
+                  decoding="async"
+                  className="w-5 md:w-6 lg:w-7"
+                />
               </a>
 
               <a
                 href="https://github.com/andyxzdev?tab=repositories"
                 target="_blank"
               >
-                <img src={S3} alt="github" className="w-5 md:w-6 lg:w-7" />
+                <img
+                  src={S3}
+                  alt="github"
+                  loading="lazy"
+                  decoding="async"
+                  className="w-5 md:w-6 lg:w-7"
+                />
               </a>
             </div>
 
@@ -181,14 +203,17 @@ const App = () => {
           {/* DIREITA (VÍDEO) */}
           <div className="w-full lg:w-[50%] xl:w-[45%] flex justify-center">
             <div className="w-full max-w-[500px] md:max-w-[600px] lg:max-w-full rounded-2xl overflow-hidden">
-              <video
-                src={Video_hero}
-                autoPlay
-                loop
-                muted
-                playsInline
-                className="w-full h-full object-cover"
-              />
+              {showVideo && (
+                <video
+                  src={Video_hero}
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  preload="none"
+                  className="w-full h-full object-cover"
+                />
+              )}
             </div>
           </div>
         </div>
@@ -200,7 +225,13 @@ const App = () => {
       >
         <div className="flex flex-col lg:flex-row w-full py-10 md:py-10 lg:pt-10">
           <motion.div>
-            <img src={Arte_Sobre} alt="imagem sobre andy" className="w-auto" />
+            <img
+              src={Arte_Sobre}
+              alt="imagem sobre andy"
+              loading="lazy"
+              decoding="async"
+              className="w-auto"
+            />
           </motion.div>
           <div className="w-full items-center lg:pt-15 xl:pt-20">
             <div>
@@ -307,6 +338,8 @@ const App = () => {
                 src={ImgSolucoes}
                 alt="imagem das soluções"
                 style={{ rotate }}
+                loading="lazy"
+                decoding="async"
                 className="w-full max-w-sm md:max-w-md xl:max-w-full"
               />
             </div>
@@ -425,6 +458,8 @@ const App = () => {
           <motion.img
             src={Img_Front_Back}
             alt="imagem do front ao back"
+            loading="lazy"
+            decoding="async"
             className="w-full max-w-sm md:max-w-md xl:max-w-full"
           />
         </div>
@@ -444,7 +479,9 @@ const App = () => {
           </motion.h1>
         </div>
         <div className="mt-20">
-          <Carrossel_Images />
+          <Suspense fallback={<div />}>
+            <Carrossel_Images />
+          </Suspense>
         </div>
       </section>
 
@@ -461,16 +498,52 @@ const App = () => {
           </motion.h1>
         </div>
         <div className="flex flex-col lg:flex-row items-center justify-center gap-24 px-7 py-7">
-          <img src={LogosReact} alt="" className="w-15" />
-          <img src={LogosNode} alt="" className="w-15" />
-          <img src={LogosTailwind} alt="" className="w-15" />
-          <img src={LogosFigma} alt="" className="w-10" />
-          <img src={LogosPhotoshop} alt="" className="w-15" />
+          <img
+            src={LogosReact}
+            alt="react js logo"
+            loading="lazy"
+            decoding="async"
+            className="w-15"
+          />
+          <img
+            src={LogosNode}
+            alt="node js logo"
+            loading="lazy"
+            decoding="async"
+            className="w-15"
+          />
+          <img
+            src={LogosTailwind}
+            alt="tailwind css logo"
+            loading="lazy"
+            decoding="async"
+            className="w-15"
+          />
+          <img
+            src={LogosFigma}
+            alt="figma logo"
+            loading="lazy"
+            decoding="async"
+            className="w-10"
+          />
+          <img
+            src={LogosPhotoshop}
+            alt="photshop logo"
+            loading="lazy"
+            decoding="async"
+            className="w-15"
+          />
         </div>
-        <div className=" flex flex-col lg:flex-row items-center justify-evenly px-7 pt-8 lg:gap-5 2xl:gap-10">
+        <div className=" flex flex-col lg:flex-row items-center justify-evenly px-7 pt-8 gap-7 lg:gap-5 2xl:gap-10">
           <div className="w-auto h-auto bg-[#d4d4d4] px-4 py-4 rounded-2xl ">
             <div className="w-full">
-              <img src={ImgProject1} alt="" className="rounded-2xl" />
+              <img
+                src={ImgProject1}
+                alt=""
+                loading="lazy"
+                decoding="async"
+                className="rounded-2xl"
+              />
             </div>
 
             <div className="pl-2 py-5">
@@ -502,7 +575,13 @@ const App = () => {
           </div>
           <div className="w-[auto] h-auto bg-[#d4d4d4] px-4 py-4 rounded-2xl ">
             <div className="w-full">
-              <img src={ImgProject2} alt="" className="rounded-2xl" />
+              <img
+                src={ImgProject2}
+                alt=""
+                loading="lazy"
+                decoding="async"
+                className="rounded-2xl"
+              />
             </div>
 
             <div className="pl-2 py-5">
@@ -532,7 +611,13 @@ const App = () => {
           </div>
           <div className="w-[auto] h-auto bg-[#d4d4d4] px-4 py-4 rounded-2xl ">
             <div className="w-full">
-              <img src={ImgProject3} alt="" className="rounded-2xl" />
+              <img
+                src={ImgProject3}
+                alt=""
+                loading="lazy"
+                decoding="async"
+                className="rounded-2xl"
+              />
             </div>
 
             <div className="pl-2 py-5">
@@ -563,7 +648,13 @@ const App = () => {
           </div>
           <div className="w-[auto] h-auto bg-[#d4d4d4] px-4 py-4 rounded-2xl ">
             <div className="w-full">
-              <img src={ImgProject4} alt="" className="rounded-2xl" />
+              <img
+                src={ImgProject4}
+                alt=""
+                loading="lazy"
+                decoding="async"
+                className="rounded-2xl"
+              />
             </div>
 
             <div className="pl-2 py-5">
@@ -596,15 +687,21 @@ const App = () => {
         </div>
       </section>
 
-      <Feedbacks />
+      <Suspense fallback={<div />}>
+        <Feedbacks />
+      </Suspense>
 
       <section className="w-full h-auto">
         <div>
-          <Forms />
+          <Suspense fallback={<div />}>
+            <Forms />
+          </Suspense>
         </div>
       </section>
 
-      <Footer></Footer>
+      <Suspense fallback={<div />}>
+        <Footer />
+      </Suspense>
     </main>
   );
 };
