@@ -401,10 +401,10 @@ const App = () => {
             >
               <Server size={44} color="white" className="mb-4" />
               <h1 className="text-white text-lg mb-2">
-                {t("services.server.title")}
+                {t("services.hosting.title")}
               </h1>
               <h2 className="text-white text-sm">
-                {t("services.server.desc")}
+                {t("services.hosting.desc")}
               </h2>
             </motion.div>
           </div>
