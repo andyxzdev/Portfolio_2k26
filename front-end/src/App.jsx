@@ -9,6 +9,7 @@ import React, {
 } from "react";
 import { Globe, Smartphone, PenTool, Server } from "lucide-react";
 import { useInView } from "react-intersection-observer";
+import { useTranslation } from "react-i18next";
 
 import Loading from "./assets/components/loading_page/Loading.jsx";
 
@@ -37,30 +38,6 @@ import S1 from "./assets/social/instagram.svg";
 import S2 from "./assets/social/linkedin.svg";
 import S3 from "./assets/social/github.svg";
 
-// import Carrossel_Images from "./assets/components/carrossel_Images/Carrossel_Images";
-// import Feedbacks from "./assets/components/feedbacks/Feedbacks.jsx";
-// import Forms from "./assets/components/forms/Forms.jsx";
-// import Footer from "./assets/components/footer/Footer.jsx";
-
-// const SplineScene = memo(() => {
-//   const [active, setActive] = useState(false);
-
-//   return (
-//     <div
-//       onMouseEnter={() => setActive(true)}
-//       onMouseLeave={() => setActive(false)}
-//       className="w-full h-full"
-//     >
-//       {active && (
-//         <Spline
-//           scene="https://prod.spline.design/pG06XrIod30UMvEf/scene.splinecode"
-//           className="lg:left-16"
-//         />
-//       )}
-//     </div>
-//   );
-// });
-
 const Carrossel_Images = lazy(
   () => import("./assets/components/carrossel_Images/Carrossel_Images"),
 );
@@ -73,6 +50,7 @@ const Footer = lazy(() => import("./assets/components/footer/Footer.jsx"));
 import Video_hero from "./assets/video/videohero.mp4";
 
 const App = () => {
+  const { t } = useTranslation();
   // 👇 controle de visibilidade do vídeo
   const { ref: inViewRef, inView } = useInView({
     triggerOnce: false,
@@ -158,7 +136,7 @@ const App = () => {
               transition={{ delay: 0.2, duration: 0.6 }}
               className="text-2xl sm:text-3xl md:text-4xl lg:text-[2.2rem] xl:text-4xl 2xl:text-[3rem] leading-tight"
             >
-              Desenvolvimento Web e Mobile
+              {t("hero.title")}
             </motion.h1>
 
             {/* SUBTITULO */}
@@ -168,7 +146,7 @@ const App = () => {
               transition={{ delay: 0.3, duration: 0.6 }}
               className="font-bold text-sm sm:text-base md:text-lg lg:text-base xl:text-[1rem] 2xl:text-[2rem]"
             >
-              que transforma ideias em produtos digitais
+              {t("hero.subtitle")}
             </motion.h2>
 
             {/* DESCRIÇÃO */}
@@ -178,8 +156,7 @@ const App = () => {
               transition={{ delay: 0.5, duration: 0.6 }}
               className="text-black text-sm sm:text-base md:text-lg lg:text-sm xl:text-base 2xl:text-[1.3rem]"
             >
-              Crio interfaces modernas, responsivas e focadas em conversão para
-              ajudar seu negócio a crescer no digital.
+              {t("hero.description")}
             </motion.p>
 
             {/* REDES */}
@@ -270,7 +247,7 @@ const App = () => {
                 viewport={{ once: true }}
                 className="text-white text-4xl sm:text-3xl md:text-5xl lg:text-[2.7rem] xl:text-[3rem] 2xl:text-[4rem] mb-4"
               >
-                Prazer, eu sou o Andy
+                {t("about.title")}
               </motion.h1>
 
               <motion.h2
@@ -280,8 +257,7 @@ const App = () => {
                 viewport={{ once: true }}
                 className="text-white text-sm sm:text-base md:text-lg lg:text-[1rem] xl:text-[1.1rem] 2xl:text-[1.3rem]"
               >
-                Sou desenvolvedor web e mobile, especializado<br></br>na criação
-                de produtos digitais modernos, rápidos e escaláveis.
+                {t("about.desc1")}
               </motion.h2>
             </div>
 
@@ -296,9 +272,7 @@ const App = () => {
                   mt-6 mb-6
                   text-sm sm:text-base md:text-lg lg:text-[1rem] xl:text-[1.1rem] 2xl:text-[1.3rem]"
               >
-                Trabalho transformando ideias em sites profissionais, aplicações
-                web<br></br>e identidades digitais que ajudam empresas a crescer
-                online.
+                {t("about.desc2")}
               </motion.h2>
 
               <motion.h2
@@ -309,13 +283,11 @@ const App = () => {
                 className="
           text-white mb-6 text-sm sm:text-base md:text-lg lg:text-[1rem] xl:text-[1.1rem] 2xl:text-[1.3rem]"
               >
-                Meu foco é unir design estratégico, tecnologia e experiência do
-                <br></br>usuário para criar soluções que realmente geram
-                resultado.
+                {t("about.desc3")}
               </motion.h2>
 
               <ContactButton2
-                text={"Faça um orçamento"}
+                text={t("about.button")}
                 onClick={handleContact}
               />
             </div>
@@ -340,7 +312,7 @@ const App = () => {
                 viewport={{ once: true }}
                 className="text-2xl sm:text-3xl md:text-4xl xl:text-[3rem] 2xl:text-[3.5rem] mb-6"
               >
-                Soluções digitais para empresas que querem crescer
+                {t("services.title")}
               </motion.h1>
 
               <motion.h2
@@ -350,12 +322,11 @@ const App = () => {
                 viewport={{ once: true }}
                 className="text-base sm:text-lg md:text-xl xl:text-[1.4rem] 2xl:text-[1.7rem] mb-8"
               >
-                Desenvolvo soluções digitais completas que ajudam empresas a se
-                posicionarem melhor na internet e conquistarem mais clientes.
+                {t("services.subtitle")}
               </motion.h2>
 
               <ContactButton
-                text={"Quero um orçamento"}
+                text={t("services.button")}
                 onClick={handleContact}
               />
             </div>
@@ -383,11 +354,10 @@ const App = () => {
               className="bg-black rounded-2xl px-6 py-6"
             >
               <Globe size={44} color="white" className="mb-4" />
-              <h1 className="text-white text-lg mb-2">Desenvolvimento web</h1>
-              <h2 className="text-white text-sm">
-                Criação de sites profissionais, landing pages e aplicações web
-                modernas.
-              </h2>
+              <h1 className="text-white text-lg mb-2">
+                {t("services.web.title")}
+              </h1>
+              <h2 className="text-white text-sm">{t("services.web.desc")}</h2>
             </motion.div>
 
             <motion.div
@@ -399,10 +369,10 @@ const App = () => {
             >
               <Smartphone size={44} color="white" className="mb-4" />
               <h1 className="text-white text-lg mb-2">
-                Desenvolvimento Mobile
+                {t("services.mobile.title")}
               </h1>
               <h2 className="text-white text-sm">
-                Aplicativos modernos para Android e iOS com alto desempenho.
+                {t("services.mobile.desc")}
               </h2>
             </motion.div>
 
@@ -414,9 +384,11 @@ const App = () => {
               className="bg-black rounded-2xl px-6 py-6"
             >
               <PenTool size={44} color="white" className="mb-4" />
-              <h1 className="text-white text-lg mb-2">Identidade Visual</h1>
+              <h1 className="text-white text-lg mb-2">
+                {t("services.design.title")}
+              </h1>
               <h2 className="text-white text-sm">
-                Criação de logotipos e identidade visual estratégica.
+                {t("services.design.desc")}
               </h2>
             </motion.div>
 
@@ -428,9 +400,11 @@ const App = () => {
               className="bg-black rounded-2xl px-6 py-6"
             >
               <Server size={44} color="white" className="mb-4" />
-              <h1 className="text-white text-lg mb-2">Domínio e Hospedagem</h1>
+              <h1 className="text-white text-lg mb-2">
+                {t("services.server.title")}
+              </h1>
               <h2 className="text-white text-sm">
-                Configuração completa para colocar seu site no ar com segurança.
+                {t("services.server.desc")}
               </h2>
             </motion.div>
           </div>
@@ -453,7 +427,7 @@ const App = () => {
             viewport={{ once: true }}
             className="text-white text-2xl sm:text-3xl md:text-4xl lg:text-[2.5rem] xl:text-[3.5rem] 2xl:text-[4rem] mb-4 md:mb-6"
           >
-            Do Back-end ao Front-end
+            {t("tech.title")}
           </motion.h1>
 
           <motion.h2
@@ -463,8 +437,7 @@ const App = () => {
             viewport={{ once: true }}
             className="text-white text-sm sm:text-base md:text-lg xl:text-[1.1rem] 2xl:text-[1.3rem]"
           >
-            Desenvolvo soluções completas, cuidando de todas as etapas do
-            projeto, desde a arquitetura do sistema até a interface final.
+            {t("tech.desc1")}
           </motion.h2>
 
           <motion.h2
@@ -474,11 +447,10 @@ const App = () => {
             viewport={{ once: true }}
             className="text-white text-sm sm:text-base md:text-lg xl:text-[1.2rem] 2xl:text-[1.5rem] mt-8 md:mt-10 mb-8 md:mb-10"
           >
-            Utilizo tecnologias modernas para garantir performance,
-            escalabilidade e segurança.
+            {t("tech.desc2")}
           </motion.h2>
 
-          <ContactButton2 text={"Saiba mais"} onClick={handleContact} />
+          <ContactButton2 text={t("tech.button")} onClick={handleContact} />
         </div>
 
         {/* IMAGEM */}
@@ -503,7 +475,7 @@ const App = () => {
             viewport={{ once: true }}
             className="text-[3rem] px-2 md:text-[3.5rem] lg:text-[3rem] xl:text-[4rem] 2xl:text-[4rem]"
           >
-            Clientes que confiam no meu trabalho
+            {t("clients.title")}
           </motion.h1>
         </div>
         <div className="mt-20">
@@ -522,7 +494,7 @@ const App = () => {
             viewport={{ once: true }}
             className="text-[3.5rem] md:text-[5rem] lg:text-[3rem] xl:text-[4rem] 2xl:text-[5rem]"
           >
-            Projetos
+            {t("projects.title")}
           </motion.h1>
         </div>
         <div className="flex flex-col lg:flex-row items-center justify-center gap-24 px-7 py-7">
@@ -575,28 +547,19 @@ const App = () => {
             </div>
 
             <div className="pl-2 py-5">
-              <h1 className="text-black 2xl:text-[1.5rem]">Landing Page</h1>
+              <h1 className="text-black 2xl:text-[1.5rem]">
+                {t("projects.1.type")}
+              </h1>
               <h2 className="text-black mt-4 2xl:text-[1.3rem]">
-                ZipRecruiter Newsletter
+                {t("projects.1.title")}
               </h2>
-              <h3 className="text-black mt-4">
-                Este projeto é uma landing page desenvolvida para a
-                ZipRecruiter, com foco em inscrição na newsletter e engajamento
-                do usuário. A página foi projetada para conectar profissionais a
-                oportunidades de trabalho globais, oferecendo insights, dicas de
-                carreira e tendências do mercado diretamente no e-mail. Com uma
-                interface limpa, chamadas para ação estratégicas e foco na
-                experiência do usuário, o objetivo é gerar valor, aumentar
-                conversões e construir um relacionamento contínuo com os
-                usuários.
-              </h3>
-              {/* <ContactButton text={"Ver projeto"} className="mt-7" /> */}
+              <h3 className="text-black mt-4">{t("projects.1.description")}</h3>
               <a
                 href="https://zip-recruiter-newslatter-landing-pa.vercel.app/"
                 target="_blank"
               >
                 <button className="px-6 py-2 rounded-full transition-all duration-300 bg-black text-white hover:bg-transparent hover:text-black hover:border hover:border-black cursor-pointer mt-7">
-                  Ver Projeto
+                  {t("projects.button")}
                 </button>
               </a>
             </div>
@@ -614,25 +577,15 @@ const App = () => {
 
             <div className="pl-2 py-5">
               <h1 className="text-black 2xl:text-[1.5rem]">
-                Site institucional
+                {t("projects.2.type")}
               </h1>
               <h2 className="text-black mt-4 2xl:text-[1.3rem]">
-                Barreto & Santana adv
+                {t("projects.2.title")}
               </h2>
-              <h3 className="text-black mt-4">
-                Este projeto é um site institucional desenvolvido para o
-                escritório Barreto & Santana Advocacia, de Belo Horizonte (MG),
-                com foco em transmitir credibilidade, profissionalismo e clareza
-                na comunicação. A página foi estruturada para apresentar as
-                áreas de atuação, diferenciais do escritório, depoimentos de
-                clientes e um canal direto de contato. Com um layout responsivo,
-                interface limpa e navegação intuitiva, o objetivo é fortalecer a
-                presença digital, gerar confiança e potencializar a captação de
-                novos clientes.
-              </h3>
+              <h3 className="text-black mt-4">{t("projects.2.description")}</h3>
               <a href="https://barretoesantana.adv.br/" target="_blank">
                 <button className="px-6 py-2 rounded-full transition-all duration-300 bg-black text-white hover:bg-transparent hover:text-black hover:border hover:border-black cursor-pointer mt-7">
-                  Ver Projeto
+                  {t("projects.button")}
                 </button>
               </a>
             </div>
@@ -649,27 +602,19 @@ const App = () => {
             </div>
 
             <div className="pl-2 py-5">
-              <h1 className="text-black 2xl:text-[1.5rem]">Landing Page</h1>
+              <h1 className="text-black 2xl:text-[1.5rem]">
+                {t("projects.3.type")}
+              </h1>
               <h2 className="text-black mt-4 2xl:text-[1.3rem]">
-                Comunidade Alta Performance Integral
+                {t("projects.3.title")}
               </h2>
-              <h3 className="text-black mt-4">
-                Este projeto é uma landing page desenvolvida para a Comunidade
-                de Alta Performance Integral, com foco em conversão e conexão
-                com o público. A página foi estruturada para apresentar de forma
-                clara o valor da comunidade, conduzindo o usuário por uma
-                jornada estratégica desde a identificação de suas dores até a
-                decisão de compra. Com uma interface limpa, linguagem humanizada
-                e foco na experiência do usuário, o objetivo é gerar
-                engajamento, fortalecer a confiança e direcionar o usuário para
-                a plataforma da Hotmart.
-              </h3>
+              <h3 className="text-black mt-4">{t("projects.3.description")}</h3>
               <a
                 href="https://www.altaperformanceintegral.com.br/"
                 target="_blank"
               >
                 <button className="px-6 py-2 rounded-full transition-all duration-300 bg-black text-white hover:bg-transparent hover:text-black hover:border hover:border-black cursor-pointer mt-7">
-                  Ver Projeto
+                  {t("projects.button")}
                 </button>
               </a>
             </div>
@@ -687,27 +632,18 @@ const App = () => {
 
             <div className="pl-2 py-5">
               <h1 className="text-black 2xl:text-[1.5rem]">
-                Site institucional
+                {t("projects.4.type")}
               </h1>
               <h2 className="text-black mt-4 2xl:text-[1.3rem]">
-                Bravo Construções
+                {t("projects.4.title")}
               </h2>
-              <h3 className="text-black mt-4">
-                Este projeto é um site institucional desenvolvido para a Bravo
-                Construções, com foco na modernização da presença digital e na
-                clareza da comunicação dos serviços. A página foi estruturada
-                para apresentar os serviços, projetos realizados e diferenciais
-                da empresa de forma estratégica e objetiva. Com uma interface
-                limpa, navegação intuitiva e foco na experiência do usuário, o
-                objetivo é transmitir profissionalismo, gerar confiança e
-                fortalecer a autoridade da marca no setor da construção civil.
-              </h3>
+              <h3 className="text-black mt-4">{t("projects.4.description")}</h3>
               <a
                 href="https://github.com/andyxzdev?tab=repositories"
                 target="_blank"
               >
                 <button className="px-6 py-2 rounded-full transition-all duration-300 bg-black text-white hover:bg-transparent hover:text-black hover:border hover:border-black cursor-pointer mt-7">
-                  Ver Projeto
+                  {t("projects.button")}
                 </button>
               </a>
             </div>

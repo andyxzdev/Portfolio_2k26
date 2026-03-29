@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useTranslation } from "react-i18next";
 
 const Forms = () => {
+  const { t } = useTranslation();
+
   const [formData, setFormData] = useState({
     nome: "",
     email: "",
@@ -26,7 +29,7 @@ const Forms = () => {
     try {
       await axios.post("/api/contato/", formData);
 
-      alert("Mensagem enviada com sucesso 🚀");
+      alert(t("form.success"));
 
       setFormData({
         nome: "",
@@ -37,7 +40,7 @@ const Forms = () => {
       });
     } catch (error) {
       console.error(error);
-      alert("Erro ao enviar. Tente novamente.");
+      alert(t("form.error"));
     } finally {
       setLoading(false);
     }
@@ -53,12 +56,9 @@ const Forms = () => {
         {/* HEADER */}
         <div className="text-center mb-12">
           <h1 className="text-3xl md:text-4xl font-bold mb-4">
-            Vamos criar seu projeto?
+            {t("form.title")}
           </h1>
-          <p className="text-gray-400 max-w-xl mx-auto">
-            Me conte um pouco sobre sua ideia e eu entro em contato para te
-            ajudar.
-          </p>
+          <p className="text-gray-400 max-w-xl mx-auto">{t("form.subtitle")}</p>
         </div>
 
         {/* FORM */}
@@ -70,7 +70,7 @@ const Forms = () => {
           <input
             type="text"
             name="nome"
-            placeholder="Seu nome"
+            placeholder={t("form.name")}
             value={formData.nome}
             onChange={handleChange}
             required
@@ -81,7 +81,7 @@ const Forms = () => {
           <input
             type="email"
             name="email"
-            placeholder="Seu email"
+            placeholder={t("form.email")}
             value={formData.email}
             onChange={handleChange}
             required
@@ -92,7 +92,7 @@ const Forms = () => {
           <input
             type="tel"
             name="telefone"
-            placeholder="Seu telefone (WhatsApp)"
+            placeholder={t("form.phone")}
             value={formData.telefone}
             onChange={handleChange}
             required
@@ -107,18 +107,18 @@ const Forms = () => {
             required
             className="w-full px-4 py-3 rounded-lg bg-[#1a1a1a] border border-gray-700 text-gray-300 focus:outline-none focus:border-white transition"
           >
-            <option value="">Tipo de projeto</option>
-            <option value="site">Site institucional</option>
-            <option value="landing">Landing Page</option>
-            <option value="sistema">Sistema Web</option>
-            <option value="mobile">Aplicativo Mobile</option>
-            <option value="design">UI/UX Design</option>
+            <option value="">{t("form.projectType")}</option>
+            <option value="site">{t("form.site")}</option>
+            <option value="landing">{t("form.landing")}</option>
+            <option value="sistema">{t("form.system")}</option>
+            <option value="mobile">{t("form.mobile")}</option>
+            <option value="design">{t("form.design")}</option>
           </select>
 
           {/* MENSAGEM */}
           <textarea
             name="mensagem"
-            placeholder="Fale sobre seu projeto..."
+            placeholder={t("form.message")}
             value={formData.mensagem}
             onChange={handleChange}
             rows={5}
@@ -132,7 +132,7 @@ const Forms = () => {
             disabled={loading}
             className="w-full py-3 rounded-full bg-white text-black font-semibold hover:opacity-80 transition disabled:opacity-50 cursor-pointer"
           >
-            {loading ? "Enviando..." : "Enviar mensagem"}
+            {loading ? t("form.sending") : t("form.send")}
           </button>
         </form>
       </div>

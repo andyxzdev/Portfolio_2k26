@@ -5,35 +5,38 @@ import Img3 from "../../images/imagem3.png";
 import Img4 from "../../images/imagem4.png";
 import Img5 from "../../images/imagem5.png";
 
+import { useTranslation } from "react-i18next";
+
 const feedbacks = [
   {
     name: "Flaviano Silva",
-    text: "Precisava de um site profissional para minha empresa e o resultado superou minhas expectativas. O design ficou moderno, rápido e já comecei a receber novos contatos na primeira semana.",
+    text: "feedbacks.1.text",
     avatar: Img2,
   },
   {
     name: "Wesley Rodrigues",
-    text: "Meu site antigo não convertia nada. Depois do novo layout e melhorias de UX, comecei a ter muito mais leads entrando pelo formulário e WhatsApp.",
+    text: "feedbacks.2.text",
     avatar: Img3,
   },
   {
     name: "Lucas Aciole",
-    text: "O projeto foi entregue no prazo e com uma qualidade excelente. O site ficou extremamente rápido e bem otimizado para SEO, o que já melhorou meu posicionamento no Google.",
+    text: "feedbacks.3.text",
     avatar: Img1,
   },
   {
     name: "Anna Barreto",
-    text: "Trabalho impecável. Além de desenvolver o site, também me ajudou com a estrutura e organização do conteúdo, o que fez toda diferença na apresentação da minha marca.",
+    text: "feedbacks.4.text",
     avatar: Img4,
   },
   {
     name: "Vitória Dias",
-    text: "Precisava de uma landing page para campanha e o resultado foi direto ao ponto: layout limpo, carregamento rápido e ótima conversão.",
+    text: "feedbacks.5.text",
     avatar: Img5,
   },
 ];
 
 const Feedbacks = () => {
+  const { t } = useTranslation();
   const [index, setIndex] = useState(0);
   const trackRef = useRef(null);
 
@@ -63,10 +66,9 @@ const Feedbacks = () => {
       className="w-full py-20 px-6 md:px-16 bg-[#111111] text-white"
     >
       <div className="text-center mb-12">
-        <h1 className="text-3xl md:text-4xl mb-4">O que meus clientes dizem</h1>
+        <h1 className="text-3xl md:text-4xl mb-4">{t("feedbacks.title")}</h1>
         <p className="text-gray-400 max-w-2xl mx-auto">
-          Depoimentos reais de pessoas que confiaram no meu trabalho para
-          crescer no digital.
+          {t("feedbacks.subtitle")}
         </p>
       </div>
 
@@ -83,7 +85,7 @@ const Feedbacks = () => {
               className="card min-w-[300px] md:min-w-[400px] bg-[#1a1a1a] rounded-2xl p-6 flex flex-col justify-between shadow-lg hover:scale-[1.03] transition-transform duration-300"
             >
               {/* TEXTO */}
-              <p className="text-gray-300 mb-6">“{feedback.text}”</p>
+              <p className="text-gray-300 mb-6">“{t(feedback.text)}”</p>
 
               {/* USUÁRIO */}
               <div className="flex items-center gap-4">
@@ -95,7 +97,9 @@ const Feedbacks = () => {
 
                 <div>
                   <h3 className="font-semibold">{feedback.name}</h3>
-                  <p className="text-sm text-gray-400">Cliente</p>
+                  <p className="text-sm text-gray-400">
+                    {t("feedbacks.client")}
+                  </p>
                 </div>
               </div>
             </div>

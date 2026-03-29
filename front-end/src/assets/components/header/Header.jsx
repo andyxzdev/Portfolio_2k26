@@ -1,7 +1,14 @@
 import React, { useState, useEffect } from "react";
 import LogoTopo from "../../logo/logodev 2.svg";
+import { useTranslation } from "react-i18next";
+import ReactCountryFlag from "react-country-flag";
 
 const Header = () => {
+  const { t, i18n } = useTranslation();
+
+  const changeLanguage = (lang) => {
+    i18n.changeLanguage(lang);
+  };
   const [menuOpen, setMenuOpen] = useState(false);
 
   const toggleMenu = () => setMenuOpen((prev) => !prev);
@@ -28,17 +35,41 @@ const Header = () => {
   };
 
   const menuItems = [
-    { label: "Início", href: "#" },
-    { label: "Sobre", href: "#sobre" },
-    { label: "Serviços", href: "#servicos" },
-    { label: "Tecnologias", href: "#tecnologias" },
-    { label: "Projetos", href: "#projetos" },
-    { label: "Feedbacks", href: "#feedbacks" },
+    { label: t("header.home"), href: "#" },
+    { label: t("header.about"), href: "#sobre" },
+    { label: t("header.services"), href: "#servicos" },
+    { label: t("header.tech"), href: "#tecnologias" },
+    { label: t("header.projects"), href: "#projetos" },
+    { label: t("header.feedbacks"), href: "#feedbacks" },
   ];
 
   return (
     <header className="w-full h-20 flex items-center justify-between px-8 absolute z-50">
       <img src={LogoTopo} alt="Logo-topo" className="w-11 h-auto" />
+
+      <div className="flex gap-3 items-center">
+        <button
+          onClick={() => changeLanguage("pt")}
+          className="hover:scale-110 transition cursor-pointer"
+        >
+          <ReactCountryFlag
+            countryCode="BR"
+            svg
+            style={{ width: "24px", height: "24px" }}
+          />
+        </button>
+
+        <button
+          onClick={() => changeLanguage("en")}
+          className="hover:scale-110 transition cursor-pointer"
+        >
+          <ReactCountryFlag
+            countryCode="US"
+            svg
+            style={{ width: "24px", height: "24px" }}
+          />
+        </button>
+      </div>
 
       {/* Botão Mobile */}
       <button
@@ -106,7 +137,7 @@ const Header = () => {
               }
             `}
           >
-            Entrar em contato
+            {t("header.contact")}
           </button>
         </ul>
       </nav>
